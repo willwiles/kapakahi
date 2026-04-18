@@ -101,7 +101,7 @@
     align-items: center;
     justify-content: flex-end;
     text-align: center;
-    padding: 0 2rem 5rem;
+    padding: 0 2rem 4rem;
     position: relative;
     overflow: hidden;
   }
@@ -109,19 +109,24 @@
     position: absolute; inset: 0;
     background-image: url('hero.png');
     background-size: cover;
-    background-position: center;
+    background-position: center top;
     z-index: 0;
   }
   .hero-bg::after {
     content: '';
     position: absolute; inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.45) 100%);
+    background: linear-gradient(to bottom,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0) 45%,
+      rgba(0,0,0,0.65) 68%,
+      rgba(0,0,0,0.82) 100%);
   }
   .hero-leaf { display: none; }
   .hero-content {
     position: relative;
     z-index: 1;
-    max-width: 700px;
+    max-width: 680px;
+    width: 100%;
   }
   .hero-badge {
     display: inline-flex;
@@ -136,37 +141,42 @@
     text-transform: uppercase;
     padding: 0.4rem 1rem;
     border-radius: 999px;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
     border: 1px solid rgba(255,255,255,0.3);
   }
   .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-size: clamp(1.9rem, 5vw, 3.2rem);
     font-weight: 700;
     line-height: 1.15;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     color: white;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
   }
   .hero h1 em {
     font-style: italic;
     color: #ffd6e8;
   }
   .hero p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: rgba(255,255,255,0.88);
-    line-height: 1.7;
-    margin-bottom: 2rem;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
     max-width: 520px;
     margin-left: auto;
     margin-right: auto;
-    text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
   }
   .hero-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+  }
+  .hero-buttons a {
+    flex: 1;
+    max-width: 200px;
+    text-align: center;
   }
   .hero .btn-secondary {
     background: rgba(255,255,255,0.15);
@@ -628,6 +638,60 @@
     section { padding: 3.5rem 1.25rem; }
     nav { padding: 0.8rem 1.25rem; }
     .trust-strip { gap: 1.5rem; padding: 0.8rem 1.25rem; }
+
+    /* Hero mobile — logo fills top, text at bottom */
+    .hero {
+      padding: 0 1.25rem 3rem;
+      min-height: 100svh;
+    }
+    .hero-bg {
+      background-position: center center;
+    }
+    .hero-bg::after {
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0) 40%,
+        rgba(0,0,0,0.65) 65%,
+        rgba(0,0,0,0.82) 100%);
+    }
+    .hero h1 {
+      font-size: 1.75rem;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .hero p {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-buttons a {
+      width: 100%;
+      max-width: 280px;
+    }
+
+    /* Trust strip wraps nicely on mobile */
+    .trust-strip {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .trust-item { font-size: 0.75rem; }
+
+    /* Packages stack cleanly */
+    .pkg-card { padding: 1.5rem; }
+    .pkg-badge { font-size: 0.65rem; }
+
+    /* Contact form full width */
+    .form-group input,
+    .form-group textarea,
+    .form-group select { font-size: 1rem; }
+
+    /* Footer */
+    .footer-bottom { flex-direction: column; text-align: center; gap: 0.5rem; }
   }
 </style>
 </head>
@@ -671,18 +735,9 @@
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
-  <div class="hero-leaf hero-leaf-1">🌺</div>
-  <div class="hero-leaf hero-leaf-2">🌿</div>
   <div class="hero-content">
-    <div class="hero-badge">
-      🌺 Proudly serving O'ahu, Hawai'i
-    </div>
-    <h1>
-      A <em>spotless</em> home,<br>more time with<br>your 'ohana
-    </h1>
-    <p>
-      Professional STR & residential cleaning and organizing across O'ahu. Mandy Kēhau Sinclair and her team treat every home like their own — thorough, trusted, and aloha-spirit guaranteed.
-    </p>
+    <h1>A <em>spotless</em> home,<br>more time with your 'ohana</h1>
+    <p>Professional STR & residential cleaning and organizing across O'ahu. Mandy Kēhau Sinclair and her team treat every home like their own — thorough, trusted, and aloha-spirit guaranteed.</p>
     <div class="hero-buttons">
       <a href="#contact" class="btn-primary">Get a Free Quote</a>
       <a href="#packages" class="btn-secondary">View Packages</a>
@@ -710,7 +765,7 @@
             <path d="M40 12 C54 20, 62 34, 56 50 C50 66, 34 68, 24 60" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
           </svg>
         </div>
-        <p style="color: rgba(212,83,126,0.8); font-family: 'Playfair Display', serif; font-size: 1rem; text-align: center; padding: 0 2rem;">Kapakahi Kleaners, LLC</p>
+        <p style="color: rgba(212,83,126,0.8); font-family: 'Playfair Display', serif; font-size: 1rem; text-align: center; padding: 0 2rem;">Pono Home Co.</p>
         <div class="about-badge-float">
           Trusted on O'ahu
           <span>EIN # 85-0787895</span>
@@ -720,7 +775,7 @@
         <p class="section-label">Meet Mandy</p>
         <h2 class="section-title">Mandy Kēhau Sinclair — Owner</h2>
         <p>
-          Kapakahi Kleaners was founded with a simple mission: give O'ahu families and vacation rental hosts their time back. Mandy Kēhau Sinclair brings the warmth of Hawaiian hospitality to every clean — detail-oriented, reliable, and deeply invested in the wellbeing of every client.
+          Pono Home Co. was founded with a simple mission: give O'ahu families and vacation rental hosts their time back. Mandy Kēhau Sinclair brings the warmth of Hawaiian hospitality to every clean — detail-oriented, reliable, and deeply invested in the wellbeing of every client.
         </p>
         <p>
           Whether you run a short-term rental and need a flawless guest-ready turnover, or you're a busy family craving a truly spotless home, Mandy's team handles it all — cleaning, organizing, decluttering, and everything in between.
@@ -856,7 +911,7 @@
       </div>
       <div class="testimonial-card">
         <div class="stars">★★★★★</div>
-        <p>"I've tried multiple cleaning services on the island and Kapakahi Kleaners is by far the best. Reliable, detailed, and Mandy genuinely cares about your home. She goes above and beyond every single time."</p>
+        <p>"I've tried multiple cleaning services on the island and Pono Home Co. is by far the best. Reliable, detailed, and Mandy genuinely cares about your home. She goes above and beyond every single time."</p>
         <div class="reviewer">Brandon K.</div>
         <div class="reviewer-loc">Resident, 'Āiea</div>
       </div>
