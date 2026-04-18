@@ -37,14 +37,14 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    background: transparent;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 100%);
     backdrop-filter: none;
     border-bottom: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0.9rem 2rem;
-    transition: background 0.3s, border-color 0.3s;
+    transition: background 0.3s;
   }
   nav.scrolled {
     background: rgba(255,255,255,0.96);
@@ -105,42 +105,39 @@
     transition: all 0.3s;
   }
 
-  /* HERO */
+  /* HERO — image tag approach, no stretching or overlap possible */
   .hero {
+    display: block;
+    background: #1a1a1a;
+    margin-top: 0;
+  }
+  .hero-image-wrap {
     position: relative;
     width: 100%;
-    min-height: 140vh;
-    margin-top: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    overflow: hidden;
+    line-height: 0;
   }
-  .hero-image {
-    position: absolute;
-    inset: 0;
-    background-image: url('hero.jpg');
-    background-size: cover;
-    background-position: center 15%;
-    background-repeat: no-repeat;
-    z-index: 0;
+  .hero-image-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
-  /* Fade only the bottom 18% — well below the logo */
-  .hero-image::after {
+  /* Fade bottom of image into dark */
+  .hero-image-wrap::after {
     content: '';
     position: absolute;
-    left: 0; right: 0; bottom: 0;
-    height: 20%;
+    left: 0; right: 0; bottom: -1px;
+    height: 30%;
     background: linear-gradient(to bottom,
       transparent 0%,
-      rgba(26,26,26,0.95) 70%,
+      rgba(26,26,26,0.95) 75%,
       rgb(26,26,26) 100%);
+    pointer-events: none;
   }
+  .hero-image { display: none; }
   .hero-text {
-    position: relative;
-    z-index: 1;
+    background: #1a1a1a;
     text-align: center;
-    padding: 0 2rem 4rem;
+    padding: 1.5rem 2rem 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -156,12 +153,11 @@
     line-height: 1.2;
     color: white;
     margin: 0;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
   }
   .hero h1 em { font-style: italic; color: #ffd6e8; }
   .hero p {
     font-size: 1rem;
-    color: rgba(255,255,255,0.78);
+    color: rgba(255,255,255,0.75);
     line-height: 1.7;
     max-width: 500px;
     margin: 0;
@@ -632,13 +628,10 @@
     .trust-strip { gap: 1.5rem; padding: 0.8rem 1.25rem; }
 
     /* Hero mobile */
-    .hero { min-height: 150svh; margin-top: 0; }
-    .hero-image { background-position: center 10%; }
-    .hero-image::after { height: 18%; }
-    .hero-text { padding: 0 1.5rem 3rem; gap: 0.75rem; }
+    .hero-text { padding: 1rem 1.5rem 3rem; gap: 0.75rem; }
     .hero h1 { font-size: 1.55rem; line-height: 1.25; }
     .hero p { font-size: 0.88rem; }
-    .hero-buttons { flex-direction: column; align-items: center; gap: 0.6rem; margin-top: 0.25rem; }
+    .hero-buttons { flex-direction: column; align-items: center; gap: 0.6rem; }
     .hero-buttons a { width: 100%; max-width: 280px; text-align: center; }
     .nav-hamburger span { background: white; }
 
@@ -703,7 +696,9 @@
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-image"></div>
+  <div class="hero-image-wrap">
+    <img src="hero.jpg" alt="Pono Home Co. — O'ahu Cleaning & Organizing">
+  </div>
   <div class="hero-text">
     <h1>A <em>spotless</em> home,<br>more time with your 'ohana</h1>
     <p>Professional STR & residential cleaning and organizing across O'ahu. Mandy Kēhau Sinclair and her team treat every home like their own — thorough, trusted, and aloha-spirit guaranteed.</p>
