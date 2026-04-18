@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kapakahi Kleaners, LLC | O'ahu Cleaning & Organizing</title>
+<meta name="description" content="STR & Residential Cleaning and Organizing on O'ahu. Serving short-term rentals, homes, and more. Let us give you time back with your family!">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --pink: #D4537E;
+    --pink-light: #FBEAF0;
+    --pink-dark: #993556;
+    --teal: #1D9E75;
+    --teal-light: #E1F5EE;
+    --teal-dark: #0F6E56;
+    --white: #ffffff;
+    --off-white: #fafaf8;
+    --text: #1a1a1a;
+    --text-muted: #666;
+    --border: rgba(0,0,0,0.1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 2rem;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-logo-mark {
+    width: 38px; height: 38px;
+    background: var(--pink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .nav-logo-mark svg { width: 20px; height: 20px; }
+  .nav-logo span {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--pink); }
+  .nav-cta {
+    background: var(--teal);
+    color: white;
+    padding: 0.55rem 1.25rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--teal-dark); }
+  .nav-hamburger { display: none; cursor: pointer; background: none; border: none; padding: 4px; }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--text); margin: 5px 0;
+    transition: all 0.3s;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 7rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, #FBEAF0 0%, #E1F5EE 50%, #fafaf8 100%);
+    z-index: 0;
+  }
+  .hero-leaf {
+    position: absolute;
+    opacity: 0.07;
+    z-index: 0;
+  }
+  .hero-leaf-1 { top: -60px; right: -80px; font-size: 280px; transform: rotate(-20deg); }
+  .hero-leaf-2 { bottom: -40px; left: -60px; font-size: 240px; transform: rotate(30deg); }
+  .hero-content { position: relative; z-index: 1; max-width: 700px; }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--teal-light);
+    color: var(--teal-dark);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--pink);
+  }
+  .hero p {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--pink);
+    color: white;
+    padding: 0.85rem 2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--pink-dark); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--teal);
+    border: 2px solid var(--teal);
+    padding: 0.85rem 2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { background: var(--teal-light); transform: translateY(-1px); }
+
+  /* TRUST STRIP */
+  .trust-strip {
+    background: var(--teal);
+    color: white;
+    padding: 0.9rem 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .trust-dot { width: 6px; height: 6px; background: rgba(255,255,255,0.5); border-radius: 50%; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  /* ABOUT */
+  .about { background: var(--off-white); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .about-image-wrap {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, var(--pink-light), var(--teal-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .about-logo-display {
+    width: 140px; height: 140px;
+    background: var(--pink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 40px rgba(212,83,126,0.3);
+  }
+  .about-logo-display svg { width: 70px; height: 70px; }
+  .about-badge-float {
+    position: absolute;
+    bottom: 1.5rem;
+    right: -0.5rem;
+    background: white;
+    border-radius: 12px;
+    padding: 0.75rem 1.25rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--teal-dark);
+  }
+  .about-badge-float span { display: block; font-size: 0.7rem; font-weight: 400; color: var(--text-muted); }
+  .about-text { }
+  .about-text p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+  .ein-badge {
+    display: inline-block;
+    background: var(--pink-light);
+    color: var(--pink-dark);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* SERVICES */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .service-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+  .service-icon {
+    width: 52px; height: 52px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 1.25rem;
+  }
+  .service-icon.pink { background: var(--pink-light); }
+  .service-icon.teal { background: var(--teal-light); }
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .service-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
+
+  /* PACKAGES */
+  .packages { background: var(--off-white); }
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .pkg-card {
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.2s;
+  }
+  .pkg-card:hover { transform: translateY(-3px); }
+  .pkg-card.featured {
+    border-color: var(--pink);
+    box-shadow: 0 8px 40px rgba(212,83,126,0.15);
+  }
+  .pkg-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--pink);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pkg-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+  }
+  .pkg-card .pkg-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .pkg-features { list-style: none; flex: 1; margin-bottom: 1.75rem; }
+  .pkg-features li {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    padding: 0.4rem 0;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+  .pkg-features li::before {
+    content: '';
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--teal-light);
+    border: 2px solid var(--teal);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .pkg-card .btn-primary, .pkg-card .btn-outline {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--pink);
+    border: 2px solid var(--pink);
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: background 0.2s;
+    display: block;
+    text-align: center;
+  }
+  .btn-outline:hover { background: var(--pink-light); }
+  .pkg-note {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .testimonial-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+  }
+  .stars { color: var(--pink); font-size: 0.9rem; margin-bottom: 0.9rem; }
+  .testimonial-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+  .reviewer { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+  .reviewer-loc { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* CONTACT */
+  .contact { background: var(--off-white); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .contact-info h2 { margin-bottom: 0.75rem; }
+  .contact-info p { font-size: 1rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem; }
+  .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .contact-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .contact-item-text a {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .contact-item-text a:hover { color: var(--teal); }
+  .contact-item-text span { display: block; font-size: 0.75rem; color: var(--text-muted); }
+
+  /* CONTACT FORM */
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.8rem; font-weight: 600; color: var(--text); letter-spacing: 0.04em; }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    background: white;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--teal); }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-submit {
+    background: var(--teal);
+    color: white;
+    padding: 0.85rem 2rem;
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover { background: var(--teal-dark); transform: translateY(-1px); }
+  .form-note { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* FOOTER */
+  footer {
+    background: #1a1a1a;
+    color: rgba(255,255,255,0.7);
+    padding: 3rem 2rem 2rem;
+  }
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 2.5rem;
+  }
+  .footer-brand p { font-size: 0.875rem; line-height: 1.7; margin-top: 0.9rem; max-width: 280px; }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.5rem;
+  }
+  .footer-logo-mark {
+    width: 34px; height: 34px;
+    background: var(--pink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .footer-logo-mark svg { width: 18px; height: 18px; }
+  .footer-logo span {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: white;
+  }
+  .footer-col h4 { color: white; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul li a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--teal); }
+  .footer-bottom {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+  }
+  .footer-bottom a { color: rgba(255,255,255,0.5); text-decoration: none; }
+
+  /* MOBILE NAV OVERLAY */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: white;
+    z-index: 200;
+    flex-direction: column;
+    padding: 5rem 2rem 2rem;
+    gap: 0.5rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 1.3rem;
+    font-family: 'Playfair Display', serif;
+    color: var(--text);
+    text-decoration: none;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-close {
+    position: absolute;
+    top: 1rem; right: 1.5rem;
+    background: none; border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .services-grid, .packages-grid, .testimonials-grid { grid-template-columns: 1fr; }
+    .about-image-wrap { aspect-ratio: 3/2; }
+    .nav-links, .nav-cta { display: none; }
+    .nav-hamburger { display: block; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 3.5rem 1.25rem; }
+    nav { padding: 0.8rem 1.25rem; }
+    .trust-strip { gap: 1.5rem; padding: 0.8rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 6 C10 6, 4 14, 6 22 C8 30, 16 36, 24 33 C32 30, 36 22, 33 15 C30 8, 22 6, 20 6Z" fill="none" stroke="white" stroke-width="2.5"/>
+        <path d="M20 6 C28 10, 32 18, 28 26 C24 34, 14 34, 10 28" fill="none" stroke="white" stroke-width="2"/>
+      </svg>
+    </div>
+    <span>Kapakahi Kleaners</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+18087574330" class="nav-cta">📞 Book Now</a>
+  <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</button>
+  <a href="#about" onclick="document.getElementById('mobileMenu').classList.remove('open')">About</a>
+  <a href="#services" onclick="document.getElementById('mobileMenu').classList.remove('open')">Services</a>
+  <a href="#packages" onclick="document.getElementById('mobileMenu').classList.remove('open')">Packages</a>
+  <a href="#testimonials" onclick="document.getElementById('mobileMenu').classList.remove('open')">Reviews</a>
+  <a href="#contact" onclick="document.getElementById('mobileMenu').classList.remove('open')">Contact</a>
+  <a href="tel:+18087574330" style="color: var(--teal); margin-top: 1rem; border-bottom: none;">📞 +1 808-757-4330</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-leaf hero-leaf-1">🌺</div>
+  <div class="hero-leaf hero-leaf-2">🌿</div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      🌺 Proudly serving O'ahu, Hawai'i
+    </div>
+    <h1>
+      A <em>spotless</em> home,<br>more time with<br>your 'ohana
+    </h1>
+    <p>
+      Professional STR & residential cleaning and organizing across O'ahu. Mandy Kēhau Sinclair and her team treat every home like their own — thorough, trusted, and aloha-spirit guaranteed.
+    </p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">Get a Free Quote</a>
+      <a href="#packages" class="btn-secondary">View Packages</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-item"><div class="trust-dot"></div>STR Turnover Specialists</div>
+  <div class="trust-item"><div class="trust-dot"></div>Residential Deep Cleaning</div>
+  <div class="trust-item"><div class="trust-dot"></div>Organizing & Decluttering</div>
+  <div class="trust-item"><div class="trust-dot"></div>Licensed & Insured LLC</div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image-wrap">
+        <div class="about-logo-display">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="36" fill="none" stroke="white" stroke-width="3"/>
+            <path d="M40 12 C22 12, 10 26, 13 42 C16 58, 30 68, 46 64 C62 60, 70 46, 66 32 C62 18, 48 12, 40 12Z" fill="none" stroke="white" stroke-width="2.5"/>
+            <path d="M40 12 C54 20, 62 34, 56 50 C50 66, 34 68, 24 60" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+          </svg>
+        </div>
+        <p style="color: rgba(212,83,126,0.8); font-family: 'Playfair Display', serif; font-size: 1rem; text-align: center; padding: 0 2rem;">Kapakahi Kleaners, LLC</p>
+        <div class="about-badge-float">
+          Trusted on O'ahu
+          <span>EIN # 85-0787895</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="section-label">Meet Mandy</p>
+        <h2 class="section-title">Mandy Kēhau Sinclair — Owner</h2>
+        <p>
+          Kapakahi Kleaners was founded with a simple mission: give O'ahu families and vacation rental hosts their time back. Mandy Kēhau Sinclair brings the warmth of Hawaiian hospitality to every clean — detail-oriented, reliable, and deeply invested in the wellbeing of every client.
+        </p>
+        <p>
+          Whether you run a short-term rental and need a flawless guest-ready turnover, or you're a busy family craving a truly spotless home, Mandy's team handles it all — cleaning, organizing, decluttering, and everything in between.
+        </p>
+        <p>
+          <strong>Let us give you time back with your family!</strong>
+        </p>
+        <div class="ein-badge">EIN # 85-0787895</div>
+        <br><br>
+        <a href="#contact" class="btn-primary" style="display: inline-block;">Book a Cleaning</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <p class="section-label">What We Do</p>
+    <h2 class="section-title">Services We Provide</h2>
+    <p class="section-sub">Every service is tailored to your home, your schedule, and your standards — done with aloha.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon pink">🏡</div>
+        <h3>Residential Cleaning</h3>
+        <p>Comprehensive top-to-bottom home cleaning. Kitchens, bathrooms, bedrooms, common areas — every corner done right so you can come home to clean.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon teal">🏖️</div>
+        <h3>STR & Vacation Rental Turnover</h3>
+        <p>Fast, thorough, and guest-ready. We reset your Airbnb, VRBO, or short-term rental between stays — linens, restocking, and a 5-star finish.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon pink">📦</div>
+        <h3>Organizing & Decluttering</h3>
+        <p>Pantries, closets, garages, and whole homes. We create systems that stick — so your space stays clear long after we leave.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon teal">🧼</div>
+        <h3>Deep Cleaning</h3>
+        <p>Move-ins, move-outs, or a fresh start. We go behind appliances, inside cabinets, and into every corner that regular cleaning doesn't reach.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon pink">🌿</div>
+        <h3>Regular Maintenance Cleans</h3>
+        <p>Weekly, bi-weekly, or monthly — we keep your home consistently clean on a schedule that works for you, so it never gets overwhelming.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon teal">✨</div>
+        <h3>Move-In / Move-Out Cleaning</h3>
+        <p>Starting fresh or leaving your best impression. We clean top-to-bottom so your deposit is protected and your new home feels brand new.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages" id="packages">
+  <div class="container">
+    <p class="section-label">Packages</p>
+    <h2 class="section-title">Choose Your Clean</h2>
+    <p class="section-sub">Transparent, straightforward packages — no surprises. Contact us for a custom quote based on your home's size and needs.</p>
+    <div class="packages-grid">
+
+      <div class="pkg-card">
+        <h3>Plumeria Clean</h3>
+        <p class="pkg-sub">Studio · 1BR · 2BR homes & STRs</p>
+        <ul class="pkg-features">
+          <li>Full vacuum & mop of all floors</li>
+          <li>Kitchen surfaces wiped down</li>
+          <li>Bathroom scrub & sanitize</li>
+          <li>Dusting of surfaces & fans</li>
+          <li>Trash emptied throughout</li>
+          <li>Bed-making & linen change (if provided)</li>
+          <li>Windows cleaned (interior)</li>
+        </ul>
+        <a href="#contact" class="btn-outline">Get a Quote</a>
+      </div>
+
+      <div class="pkg-card featured">
+        <div class="pkg-badge">Most Popular</div>
+        <h3>Hibiscus Clean</h3>
+        <p class="pkg-sub">3–4BR homes, STRs & condos</p>
+        <ul class="pkg-features">
+          <li>Everything in Plumeria, plus:</li>
+          <li>Inside oven & microwave cleaned</li>
+          <li>Inside fridge wipe-down</li>
+          <li>Baseboards and door frames</li>
+          <li>Light fixture dusting</li>
+          <li>Closet tidying & organizing</li>
+          <li>Restocking consumables (guest soaps, paper goods)</li>
+        </ul>
+        <a href="#contact" class="btn-primary">Get a Quote</a>
+      </div>
+
+      <div class="pkg-card">
+        <h3>Pua Kea Deep Clean</h3>
+        <p class="pkg-sub">Any size · Move-in/out · Full resets</p>
+        <ul class="pkg-features">
+          <li>Everything in Hibiscus, plus:</li>
+          <li>Full cabinet & drawer interiors</li>
+          <li>Grout scrubbing</li>
+          <li>Deep shampoo of carpets & mats</li>
+          <li>Organzing & decluttering session</li>
+          <li>Full laundry & linen refresh</li>
+          <li>Post-construction cleaning available</li>
+        </ul>
+        <a href="#contact" class="btn-outline">Get a Quote</a>
+      </div>
+
+    </div>
+    <p class="pkg-note">* Prices vary based on home size, condition, and frequency. Contact Mandy for a personalized quote.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <p class="section-label">Happy Clients</p>
+    <h2 class="section-title">What O'ahu is saying</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Mandy and her team are absolutely incredible. Our Airbnb has never looked better between guests — fast, thorough, and so easy to work with. Guests keep commenting on how clean the space is!"</p>
+        <div class="reviewer">Kalani T.</div>
+        <div class="reviewer-loc">STR Host, Kailua</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"I was drowning in clutter after our move. Mandy came in and turned our whole home around in one day. The organizing systems she set up have lasted months. Truly life-changing — worth every penny!"</p>
+        <div class="reviewer">Sarah M.</div>
+        <div class="reviewer-loc">Homeowner, Honolulu</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"I've tried multiple cleaning services on the island and Kapakahi Kleaners is by far the best. Reliable, detailed, and Mandy genuinely cares about your home. She goes above and beyond every single time."</p>
+        <div class="reviewer">Brandon K.</div>
+        <div class="reviewer-loc">Resident, 'Āiea</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="section-label">Get in Touch</p>
+        <h2 class="section-title">Ready for a clean home?</h2>
+        <p>Reach out via phone, email, or fill out the form and Mandy will get back to you quickly with availability and a quote.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-item-text">
+              <a href="tel:+18087574330">+1 808-757-4330</a>
+              <span>Call or text — Mobile</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-item-text">
+              <a href="mailto:kapakahi.kleaners@gmail.com">kapakahi.kleaners@gmail.com</a>
+              <span>Work Email</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💳</div>
+            <div class="contact-item-text">
+              <a href="https://paypal.com" target="_blank" rel="noopener">Pay via PayPal</a>
+              <span>Fast & secure payment</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💵</div>
+            <div class="contact-item-text">
+              <a href="https://cash.app" target="_blank" rel="noopener">Pay via CashApp</a>
+              <span>Also accepted</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Kai" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Aloha" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="you@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" placeholder="+1 (808) 000-0000">
+        </div>
+        <div class="form-group">
+          <label>Service Needed</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>STR / Vacation Rental Turnover</option>
+            <option>Residential Cleaning</option>
+            <option>Deep Cleaning</option>
+            <option>Organizing & Decluttering</option>
+            <option>Move-In / Move-Out Clean</option>
+            <option>Regular Maintenance (recurring)</option>
+            <option>Not sure — need a quote</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell us about your space</label>
+          <textarea placeholder="Approx. home size, number of bedrooms, any special requests or areas of focus..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message 🌺</button>
+        <p class="form-note">Mandy typically responds within a few hours. Looking forward to hearing from you!</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="footer-logo-mark">
+          <svg viewBox="0 0 40 40" fill="none"><path d="M20 6 C10 6, 4 14, 6 22 C8 30, 16 36, 24 33 C32 30, 36 22, 33 15 C30 8, 22 6, 20 6Z" fill="none" stroke="white" stroke-width="2.5"/><path d="M20 6 C28 10, 32 18, 28 26 C24 34, 14 34, 10 28" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"/></svg>
+        </div>
+        <span>Kapakahi Kleaners, LLC</span>
+      </div>
+      <p>STR & Residential Cleaning & Organizing on O'ahu, Hawai'i. Let us give you time back with your family.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">About Mandy</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+18087574330">+1 808-757-4330</a></li>
+        <li><a href="mailto:kapakahi.kleaners@gmail.com">kapakahi.kleaners@gmail.com</a></li>
+        <li><a href="#">Pay via PayPal</a></li>
+        <li><a href="#">Pay via CashApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Kapakahi Kleaners, LLC · O'ahu, Hawai'i · EIN # 85-0787895</span>
+    <span>Built with <span style="color: var(--pink);">♥</span> for Mandy Kēhau Sinclair</span>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav shadow on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+  });
+
+  // Contact form — show a nice confirmation
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.form-submit');
+    btn.textContent = '✓ Message Sent! Mandy will be in touch soon 🌺';
+    btn.style.background = '#1D9E75';
+    btn.disabled = true;
+  });
+</script>
+
+</body>
+</html>
