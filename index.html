@@ -37,14 +37,24 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
+    background: transparent;
+    backdrop-filter: none;
+    border-bottom: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0.9rem 2rem;
+    transition: background 0.3s, border-color 0.3s;
   }
+  nav.scrolled {
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav.scrolled .nav-links a { color: var(--text-muted); }
+  nav.scrolled .nav-links a:hover { color: var(--pink); }
+  nav.scrolled .nav-logo span { color: var(--text); }
+  nav.scrolled .nav-hamburger span { background: var(--text); }
   .nav-logo {
     display: flex;
     align-items: center;
@@ -61,19 +71,21 @@
   .nav-logo span {
     font-family: 'Playfair Display', serif;
     font-size: 1.05rem;
-    color: var(--text);
+    color: white;
     line-height: 1.2;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
   }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a {
     text-decoration: none;
     font-size: 0.875rem;
     font-weight: 500;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.9);
     letter-spacing: 0.03em;
     transition: color 0.2s;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
   }
-  .nav-links a:hover { color: var(--pink); }
+  .nav-links a:hover { color: #ffd6e8; }
   .nav-cta {
     background: var(--teal);
     color: white;
@@ -89,47 +101,46 @@
   .nav-hamburger { display: none; cursor: pointer; background: none; border: none; padding: 4px; }
   .nav-hamburger span {
     display: block; width: 22px; height: 2px;
-    background: var(--text); margin: 5px 0;
+    background: white; margin: 5px 0;
     transition: all 0.3s;
   }
 
   /* HERO */
   .hero {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    margin-top: 62px;
-  }
-  .hero-image-wrap {
     position: relative;
     width: 100%;
-    aspect-ratio: 16/9;
+    min-height: 100vh;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     overflow: hidden;
   }
   .hero-image {
-    width: 100%;
-    height: 100%;
-    background-image: url('hero.png');
-    background-size: 110%;
-    background-position: center 30%;
-    display: block;
+    position: absolute;
+    inset: 0;
+    background-image: url('hero.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: 0;
   }
-  /* Smooth fade from image into dark section below */
-  .hero-image-wrap::after {
+  /* Fade ONLY the very bottom — logo stays bright */
+  .hero-image::after {
     content: '';
     position: absolute;
     left: 0; right: 0; bottom: 0;
-    height: 45%;
+    height: 35%;
     background: linear-gradient(to bottom,
-      rgba(26,26,26,0) 0%,
-      rgba(26,26,26,0.6) 60%,
-      rgba(26,26,26,1) 100%);
-    pointer-events: none;
+      transparent 0%,
+      rgba(26,26,26,0.85) 75%,
+      rgb(26,26,26) 100%);
   }
   .hero-text {
-    background: #1a1a1a;
+    position: relative;
+    z-index: 1;
     text-align: center;
-    padding: 0 2rem 3.5rem;
+    padding: 0 2rem 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -145,14 +156,12 @@
     line-height: 1.2;
     color: white;
     margin: 0;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
   }
-  .hero h1 em {
-    font-style: italic;
-    color: #ffd6e8;
-  }
+  .hero h1 em { font-style: italic; color: #ffd6e8; }
   .hero p {
     font-size: 1rem;
-    color: rgba(255,255,255,0.72);
+    color: rgba(255,255,255,0.78);
     line-height: 1.7;
     max-width: 500px;
     margin: 0;
@@ -623,14 +632,14 @@
     .trust-strip { gap: 1.5rem; padding: 0.8rem 1.25rem; }
 
     /* Hero mobile */
-    .hero { margin-top: 56px; }
-    .hero-image-wrap { aspect-ratio: 4/5; }
-    .hero-image { background-size: 120%; background-position: center 25%; }
+    .hero { min-height: 100svh; margin-top: 0; }
+    .hero-image { background-position: 35% center; }
     .hero-text { padding: 0 1.25rem 2.5rem; gap: 0.85rem; }
     .hero h1 { font-size: 1.75rem; }
     .hero p { font-size: 0.92rem; }
     .hero-buttons { flex-direction: column; align-items: center; }
     .hero-buttons a { width: 100%; max-width: 260px; text-align: center; }
+    .nav-hamburger span { background: white; }
 
     /* Trust strip wraps nicely on mobile */
     .trust-strip {
@@ -693,9 +702,7 @@
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-image-wrap">
-    <div class="hero-image"></div>
-  </div>
+  <div class="hero-image"></div>
   <div class="hero-text">
     <h1>A <em>spotless</em> home,<br>more time with your 'ohana</h1>
     <p>Professional STR & residential cleaning and organizing across O'ahu. Mandy Kēhau Sinclair and her team treat every home like their own — thorough, trusted, and aloha-spirit guaranteed.</p>
@@ -1002,10 +1009,14 @@
 </footer>
 
 <script>
-  // Sticky nav shadow on scroll
+  // Nav becomes solid white after scrolling past hero
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
-    nav.style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+    if (window.scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
   });
 
   // Contact form — show a nice confirmation
