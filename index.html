@@ -2,678 +2,1042 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Pono Home Co. | O'ahu Cleaning & Organizing</title>
 <meta name="description" content="STR & Residential Cleaning and Organizing on O'ahu. Serving short-term rentals, homes, and more. Let us give you time back with your family!">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --pink: #D4537E;
-    --pink-light: #FBEAF0;
-    --pink-dark: #993556;
-    --teal: #1D9E75;
-    --teal-light: #E1F5EE;
-    --teal-dark: #0F6E56;
-    --white: #ffffff;
-    --off-white: #fafaf8;
-    --text: #1a1a1a;
-    --text-muted: #666;
-    --border: rgba(0,0,0,0.1);
-  }
+:root {
+  --pink:       #D4537E;
+  --pink-light: #FBEAF0;
+  --pink-dark:  #993556;
+  --teal:       #1D9E75;
+  --teal-light: #E1F5EE;
+  --teal-dark:  #0F6E56;
+  --white:      #ffffff;
+  --off-white:  #fafaf8;
+  --text:       #1a1a1a;
+  --text-muted: #666;
+  --border:     rgba(0,0,0,0.09);
+  --dark:       #1a1a1a;
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md:  0 8px 30px rgba(0,0,0,0.09);
+  --shadow-lg:  0 20px 60px rgba(0,0,0,0.12);
+}
 
-  html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    color: var(--text);
-    background: #1a1a1a;
-    overflow-x: hidden;
-  }
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: var(--dark);
+  overflow-x: hidden;
+}
 
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: transparent;
-    backdrop-filter: none;
-    border-bottom: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.9rem 2rem;
-    transition: background 0.3s;
-  }
-  nav.scrolled {
-    background: rgba(255,255,255,0.96);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
-  }
-  nav.scrolled .nav-links a { color: var(--text-muted); }
-  nav.scrolled .nav-links a:hover { color: var(--pink); }
-  nav.scrolled .nav-logo span { color: var(--text); text-shadow: none; }
-  nav.scrolled .nav-hamburger span { background: var(--text); }
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .nav-logo-mark {
-    width: 38px; height: 38px;
-    background: var(--pink);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .nav-logo-mark svg { width: 20px; height: 20px; }
-  .nav-logo span {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    color: white;
-    line-height: 1.2;
-    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
-  }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: rgba(255,255,255,0.9);
-    letter-spacing: 0.03em;
-    transition: color 0.2s;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
-  }
-  .nav-links a:hover { color: #ffd6e8; }
-  .nav-cta {
-    background: var(--teal);
-    color: white;
-    padding: 0.55rem 1.25rem;
-    border-radius: 999px;
-    text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: background 0.2s;
-    white-space: nowrap;
-  }
-  .nav-cta:hover { background: var(--teal-dark); }
-  .nav-hamburger { display: none; cursor: pointer; background: none; border: none; padding: 4px; }
-  .nav-hamburger span {
-    display: block; width: 22px; height: 2px;
-    background: white; margin: 5px 0;
-    transition: all 0.3s;
-  }
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ NAV ━━━━━━━ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2.5rem;
+  padding-top: calc(1rem + env(safe-area-inset-top));
+  transition: background 0.35s, box-shadow 0.35s, padding 0.35s;
+}
+nav.scrolled {
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 var(--border);
+  padding-top: calc(0.75rem + env(safe-area-inset-top));
+  padding-bottom: 0.75rem;
+}
+nav.scrolled .nav-links a { color: var(--text-muted); text-shadow: none; }
+nav.scrolled .nav-links a:hover { color: var(--pink); }
+nav.scrolled .nav-logo-text { color: var(--text); text-shadow: none; }
+nav.scrolled .nav-hamburger span { background: var(--text); }
 
-  /* HERO — img tag, no overlap ever */
-  .hero {
-    display: block;
-    background: #1a1a1a;
-    margin-top: 0;
-    padding: 0;
-  }
-  .hero-image-wrap {
-    position: relative;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    line-height: 0;
-    overflow: hidden;
-  }
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo-mark {
+  width: 36px; height: 36px;
+  background: var(--pink);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(212,83,126,0.4);
+}
+.nav-logo-mark svg { width: 19px; height: 19px; }
+.nav-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: white;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+  transition: color 0.3s, text-shadow 0.3s;
+  white-space: nowrap;
+}
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.35);
+}
+.nav-links a:hover { color: #ffd0e6; }
+.nav-cta {
+  background: var(--teal);
+  color: white !important;
+  padding: 0.55rem 1.3rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  white-space: nowrap;
+  text-shadow: none !important;
+  box-shadow: 0 2px 12px rgba(29,158,117,0.35);
+}
+.nav-cta:hover { background: var(--teal-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(29,158,117,0.45); }
+.nav-hamburger {
+  display: none;
+  cursor: pointer;
+  background: none; border: none;
+  padding: 8px; margin: -8px;
+  border-radius: 8px;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: white; margin: 5px 0;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ HERO ━━━━━━━ */
+/*
+  Desktop: full-viewport image with text overlaid at the bottom.
+  Mobile:  shorter image, text stacked below on dark bg.
+*/
+.hero {
+  position: relative;
+  background: var(--dark);
+  padding: 0; /* override global section padding — image must bleed edge-to-edge */
+  margin: 0;
+}
+
+.hero-image-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Desktop: fill the full viewport so logo is never cut off */
+.hero-image-wrap img {
+  width: 100%;
+  height: 100vh;
+  min-height: 640px;
+  max-height: 980px;
+  object-fit: cover;
+  object-position: center center; /* logo lives in center of image */
+  display: block;
+}
+
+/* Multi-stop gradient: gentle at top (nav legibility), strong at bottom (text legibility) */
+.hero-image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(0,0,0,0.18) 0%,
+      transparent       18%,
+      transparent       38%,
+      rgba(26,26,26,0.5)  60%,
+      rgba(26,26,26,0.88) 78%,
+      rgb(26,26,26)       100%);
+  pointer-events: none;
+}
+
+/* Text is INSIDE the image-wrap, absolutely positioned at the bottom */
+.hero-text {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  z-index: 2;
+  text-align: center;
+  padding: 0 2rem 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.18;
+  color: white;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  margin: 0;
+}
+.hero h1 em {
+  font-style: italic;
+  color: #ffd0e6;
+}
+.hero p {
+  font-size: clamp(0.92rem, 1.8vw, 1.05rem);
+  color: rgba(255,255,255,0.8);
+  line-height: 1.75;
+  max-width: 520px;
+  margin: 0;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+}
+.hero-buttons {
+  display: flex;
+  gap: 0.9rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 0.3rem;
+}
+.hero .btn-secondary {
+  background: transparent;
+  border-color: rgba(255,255,255,0.5);
+  color: white;
+}
+.hero .btn-secondary:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.8);
+}
+
+/* Scroll hint */
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.5;
+  animation: scrollBob 2s ease-in-out infinite;
+}
+.hero-scroll-hint svg { width: 20px; height: 20px; }
+@keyframes scrollBob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ BUTTONS ━━━━━ */
+.btn-primary {
+  background: var(--pink);
+  color: white;
+  padding: 0.875rem 2.1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.2s, transform 0.18s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  box-shadow: 0 4px 16px rgba(212,83,126,0.3);
+}
+.btn-primary:hover {
+  background: var(--pink-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212,83,126,0.4);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--teal);
+  border: 2px solid var(--teal);
+  padding: 0.875rem 2.1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.2s, transform 0.18s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+}
+.btn-secondary:hover {
+  background: var(--teal-light);
+  transform: translateY(-2px);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--pink);
+  border: 2px solid var(--pink);
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: background 0.2s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+}
+.btn-outline:hover {
+  background: var(--pink-light);
+  transform: translateY(-1px);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ TRUST STRIP ━━ */
+.trust-strip {
+  background: var(--teal);
+  color: white;
+  padding: 1.1rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.trust-dot {
+  width: 5px; height: 5px;
+  background: rgba(255,255,255,0.55);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SCROLL FX ━━━━ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-up-delay-1 { transition-delay: 0.1s; }
+.fade-up-delay-2 { transition-delay: 0.2s; }
+.fade-up-delay-3 { transition-delay: 0.3s; }
+.fade-up-delay-4 { transition-delay: 0.4s; }
+.fade-up-delay-5 { transition-delay: 0.5s; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SECTIONS ━━━━━ */
+section { padding: 5.5rem 2rem; }
+.container { max-width: 1100px; margin: 0 auto; }
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 20px; height: 2px;
+  background: var(--teal);
+  border-radius: 2px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.65rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+.section-sub {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 560px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ABOUT ━━━━━━ */
+.about { background: var(--off-white); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.about-image-wrap {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #fce8f1 0%, #e8f7f1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+/* Decorative tropical pattern circles */
+.about-image-wrap::before {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,83,126,0.08) 0%, transparent 70%);
+  top: -60px; right: -60px;
+}
+.about-logo-display {
+  width: 130px; height: 130px;
+  background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 40px rgba(212,83,126,0.35), 0 0 0 8px rgba(212,83,126,0.1);
+  z-index: 1;
+}
+.about-logo-display svg { width: 65px; height: 65px; }
+.about-name-tag {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--pink-dark);
+  z-index: 1;
+}
+.about-badge-float {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.25rem;
+  background: white;
+  border-radius: 14px;
+  padding: 0.8rem 1.2rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--teal-dark);
+  z-index: 2;
+  white-space: nowrap;
+  border: 1px solid rgba(29,158,117,0.15);
+}
+.about-badge-float span {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+.about-text .section-title { margin-top: 0.25rem; }
+.about-text p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
+}
+.ein-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--pink-light);
+  color: var(--pink-dark);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  margin-top: 0.25rem;
+  letter-spacing: 0.04em;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SERVICES ━━━━━ */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+  margin-top: 3rem;
+}
+.service-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 2rem 1.6rem;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--pink), var(--pink-dark));
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.service-card.teal-accent::before {
+  background: linear-gradient(90deg, var(--teal), var(--teal-dark));
+}
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+.service-card:hover::before { opacity: 1; }
+.service-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.55rem;
+  margin-bottom: 1.25rem;
+}
+.service-icon.pink { background: var(--pink-light); }
+.service-icon.teal { background: var(--teal-light); }
+.service-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
+  color: var(--text);
+  line-height: 1.3;
+}
+.service-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ PACKAGES ━━━━━ */
+.packages { background: var(--off-white); }
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+  align-items: start;
+}
+.pkg-card {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.pkg-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.pkg-card.featured {
+  border-color: var(--pink);
+  box-shadow: 0 8px 40px rgba(212,83,126,0.18);
+  transform: scale(1.02);
+}
+.pkg-card.featured:hover { transform: scale(1.02) translateY(-4px); }
+.pkg-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, var(--pink), var(--pink-dark));
+  color: white;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.32rem 1.1rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(212,83,126,0.3);
+}
+.pkg-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  margin-bottom: 0.35rem;
+  color: var(--text);
+}
+.pkg-card .pkg-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.pkg-features { list-style: none; flex: 1; margin-bottom: 1.75rem; }
+.pkg-features li {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  padding: 0.42rem 0;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  line-height: 1.5;
+}
+.pkg-features li::before {
+  content: '';
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--teal-light);
+  border: 2px solid var(--teal);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.pkg-card .btn-primary,
+.pkg-card .btn-outline {
+  width: 100%;
+}
+.pkg-note {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━ TESTIMONIALS ━━━ */
+.testimonials { background: white; }
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.testimonial-card {
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 2rem 1.75rem;
+  position: relative;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+/* Big decorative quote mark */
+.testimonial-card::before {
+  content: '\201C';
+  position: absolute;
+  top: 0.5rem;
+  right: 1.25rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--pink-light);
+  pointer-events: none;
+}
+.stars {
+  color: #F5A623;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.9rem;
+}
+.testimonial-card p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 1.4rem;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+.reviewer { font-size: 0.875rem; font-weight: 700; color: var(--text); }
+.reviewer-loc { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+/* Review badge */
+.reviews-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+  padding: 1rem 1.5rem;
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+.reviews-badge-stars { color: #F5A623; font-size: 1rem; letter-spacing: 2px; }
+.reviews-badge p { font-size: 0.85rem; color: var(--text-muted); margin: 0; font-style: normal; }
+.reviews-badge strong { color: var(--text); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ CONTACT ━━━━━━ */
+.contact { background: var(--off-white); }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 4.5rem;
+  align-items: start;
+}
+.contact-info h2 { margin-bottom: 0.75rem; }
+.contact-info > p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 2.25rem;
+}
+.contact-items { display: flex; flex-direction: column; gap: 1rem; }
+.contact-item { display: flex; align-items: center; gap: 1rem; }
+.contact-icon {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+  font-size: 1rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(29,158,117,0.25);
+}
+.contact-item-text a {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.contact-item-text a:hover { color: var(--teal); }
+.contact-item-text span {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ FORM ━━━━━━━━━ */
+.contact-form-wrap {
+  background: white;
+  border-radius: 20px;
+  padding: 2.25rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+}
+.form-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 0.8rem 1rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--off-white);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  -webkit-appearance: none; appearance: none;
+}
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 16px;
+  padding-right: 2.5rem;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--teal);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(29,158,117,0.1);
+}
+.form-group textarea { resize: vertical; min-height: 110px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-submit {
+  background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+  color: white;
+  padding: 0.95rem 2rem;
+  border-radius: 999px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.18s, box-shadow 0.2s;
+  margin-top: 0.25rem;
+  min-height: 52px;
+  box-shadow: 0 4px 16px rgba(29,158,117,0.3);
+}
+.form-submit:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(29,158,117,0.4);
+}
+.form-note {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ FOOTER ━━━━━━ */
+footer {
+  background: #111;
+  color: rgba(255,255,255,0.65);
+  padding: 4rem 2.5rem 2rem;
+  padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2.2fr 1fr 1fr;
+  gap: 3.5rem;
+  margin-bottom: 3rem;
+}
+.footer-brand p {
+  font-size: 0.875rem;
+  line-height: 1.8;
+  margin-top: 1rem;
+  max-width: 270px;
+  color: rgba(255,255,255,0.5);
+}
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer-logo-mark {
+  width: 34px; height: 34px;
+  background: var(--pink);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.footer-logo-mark svg { width: 17px; height: 17px; }
+.footer-logo span {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: white;
+}
+.footer-col h4 {
+  color: rgba(255,255,255,0.9);
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+.footer-col ul li a {
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+.footer-col ul li a:hover { color: var(--teal); }
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.3);
+}
+.footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━ MOBILE MENU ━━━━ */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: white;
+  z-index: 200;
+  flex-direction: column;
+  padding: 5.5rem 2rem 2rem;
+  gap: 0;
+  overflow-y: auto;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 1.25rem;
+  font-family: 'Playfair Display', serif;
+  color: var(--text);
+  text-decoration: none;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s, padding-left 0.2s;
+}
+.mobile-menu a:hover { color: var(--pink); padding-left: 6px; }
+.mobile-cta {
+  margin-top: 1.75rem;
+  border-bottom: none !important;
+  background: var(--teal) !important;
+  color: white !important;
+  text-align: center;
+  border-radius: 999px;
+  padding: 1rem 2rem !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 600;
+}
+.mobile-close {
+  position: absolute;
+  top: 1rem; right: 1.25rem;
+  background: var(--off-white); border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text);
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━ TABLET (≤900px) ━━━━━━ */
+@media (max-width: 900px) {
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .packages-grid { grid-template-columns: 1fr; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .pkg-card.featured { transform: none; }
+  .pkg-card.featured:hover { transform: translateY(-4px); }
+  .testimonials-grid { grid-template-columns: 1fr 1fr; }
+  .about-image-wrap { aspect-ratio: 3/2; max-width: 420px; }
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: block; }
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .footer-brand { grid-column: 1 / -1; }
+  .form-row { grid-template-columns: 1fr 1fr; }
+  nav { padding-left: 1.5rem; padding-right: 1.5rem; }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━ MOBILE (≤600px) ━━━━━━ */
+@media (max-width: 600px) {
+  section { padding: 3.75rem 1.25rem; }
+  nav { padding: 0.85rem 1.25rem; padding-top: calc(0.85rem + env(safe-area-inset-top)); }
+
+  /* ── Mobile Hero: image + text STACKED ── */
   .hero-image-wrap img {
-    width: 100%;
-    height: auto;
-    display: block;
+    height: clamp(240px, 72vw, 420px);
+    min-height: unset;
+    max-height: unset;
+    object-position: center 20%;
   }
-  /* Fade bottom edge seamlessly into dark */
+
+  /* Shallower overlay gradient on mobile */
   .hero-image-wrap::after {
-    content: '';
-    position: absolute;
-    left: 0; right: 0; bottom: -2px;
-    height: 35%;
     background: linear-gradient(to bottom,
-      transparent 0%,
-      rgba(26,26,26,0.92) 70%,
-      rgb(26,26,26) 100%);
-    pointer-events: none;
+      rgba(0,0,0,0.12) 0%,
+      transparent       20%,
+      rgba(26,26,26,0.65) 70%,
+      rgb(26,26,26)       100%);
   }
-  .hero-image { display: none; }
+
+  /* On mobile, text moves OUT of absolute positioning → normal flow */
   .hero-text {
-    background: #1a1a1a;
-    text-align: center;
-    padding: 0.5rem 2rem 4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.85rem;
+    position: static;
+    padding: 1.5rem 1.25rem 3.25rem;
+    gap: 0.9rem;
+    background: var(--dark);
+    /* Remove upward overlap — let it stack naturally */
+    margin-top: -4px; /* close the seam */
   }
-  .hero-leaf { display: none; }
-  .hero-bg { display: none; }
-  .hero-content { display: contents; }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    font-weight: 700;
-    line-height: 1.2;
-    color: white;
-    margin: 0;
-  }
-  .hero h1 em { font-style: italic; color: #ffd6e8; }
-  .hero p {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.7;
-    max-width: 500px;
-    margin: 0;
-  }
-  .hero-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 0.5rem;
-  }
-  .hero .btn-secondary {
-    background: transparent;
-    border-color: rgba(255,255,255,0.5);
-    color: white;
-  }
-  .hero .btn-secondary:hover { background: rgba(255,255,255,0.1); }
-  .btn-primary {
-    background: var(--pink);
-    color: white;
-    padding: 0.85rem 2rem;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: background 0.2s, transform 0.15s;
-    display: inline-block;
-  }
-  .btn-primary:hover { background: var(--pink-dark); transform: translateY(-1px); }
-  .btn-secondary {
-    background: transparent;
-    color: var(--teal);
-    border: 2px solid var(--teal);
-    padding: 0.85rem 2rem;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: background 0.2s, transform 0.15s;
-    display: inline-block;
-  }
-  .btn-secondary:hover { background: var(--teal-light); transform: translateY(-1px); }
+  .hero h1 { font-size: clamp(1.55rem, 7.5vw, 2rem); line-height: 1.25; }
+  .hero p { font-size: 0.9rem; text-shadow: none; }
+  .hero-buttons { flex-direction: column; align-items: stretch; gap: 0.65rem; }
+  .hero-buttons a { width: 100%; text-align: center; }
+  .hero-scroll-hint { display: none; }
 
-  /* TRUST STRIP */
+  /* Trust strip: 2×2 grid */
   .trust-strip {
-    background: var(--teal);
-    color: white;
-    padding: 0.9rem 2rem;
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    flex-wrap: wrap;
-  }
-  .trust-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-  .trust-dot { width: 6px; height: 6px; background: rgba(255,255,255,0.5); border-radius: 50%; }
-
-  /* SECTIONS */
-  section { padding: 5rem 2rem; }
-  .container { max-width: 1100px; margin: 0 auto; }
-  .section-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 0.75rem;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-  .section-sub {
-    font-size: 1rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-    max-width: 560px;
-  }
-
-  /* ABOUT */
-  .about { background: var(--off-white); }
-  .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
+    gap: 0.7rem 1rem;
+    padding: 1rem 1.25rem;
   }
-  .about-image-wrap {
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    aspect-ratio: 4/5;
-    background: linear-gradient(135deg, var(--pink-light), var(--teal-light));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .about-logo-display {
-    width: 140px; height: 140px;
-    background: var(--pink);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 12px 40px rgba(212,83,126,0.3);
-  }
-  .about-logo-display svg { width: 70px; height: 70px; }
-  .about-badge-float {
-    position: absolute;
-    bottom: 1.5rem;
-    right: -0.5rem;
-    background: white;
-    border-radius: 12px;
-    padding: 0.75rem 1.25rem;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--teal-dark);
-  }
-  .about-badge-float span { display: block; font-size: 0.7rem; font-weight: 400; color: var(--text-muted); }
-  .about-text { }
-  .about-text p {
-    font-size: 1rem;
-    color: var(--text-muted);
-    line-height: 1.8;
-    margin-bottom: 1.25rem;
-  }
-  .ein-badge {
-    display: inline-block;
-    background: var(--pink-light);
-    color: var(--pink-dark);
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 0.4rem 0.9rem;
-    border-radius: 6px;
-    margin-top: 0.5rem;
-    letter-spacing: 0.04em;
-  }
+  .trust-item { font-size: 0.71rem; white-space: normal; }
 
-  /* SERVICES */
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-  .service-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem 1.5rem;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
-  .service-icon {
-    width: 52px; height: 52px;
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.6rem;
-    margin-bottom: 1.25rem;
-  }
-  .service-icon.pink { background: var(--pink-light); }
-  .service-icon.teal { background: var(--teal-light); }
-  .service-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
-  .service-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
+  /* Services: single col */
+  .services-grid { grid-template-columns: 1fr; }
 
-  /* PACKAGES */
-  .packages { background: var(--off-white); }
-  .packages-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-  .pkg-card {
-    background: white;
-    border: 2px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    transition: transform 0.2s;
-  }
-  .pkg-card:hover { transform: translateY(-3px); }
-  .pkg-card.featured {
-    border-color: var(--pink);
-    box-shadow: 0 8px 40px rgba(212,83,126,0.15);
-  }
-  .pkg-badge {
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--pink);
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.9rem;
-    border-radius: 999px;
-    white-space: nowrap;
-  }
-  .pkg-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    margin-bottom: 0.3rem;
-  }
-  .pkg-card .pkg-sub {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .pkg-features { list-style: none; flex: 1; margin-bottom: 1.75rem; }
-  .pkg-features li {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    padding: 0.4rem 0;
-    display: flex;
-    gap: 8px;
-    align-items: flex-start;
-    line-height: 1.5;
-  }
-  .pkg-features li::before {
-    content: '';
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    background: var(--teal-light);
-    border: 2px solid var(--teal);
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .pkg-card .btn-primary, .pkg-card .btn-outline {
-    display: block;
-    text-align: center;
-    width: 100%;
-  }
-  .btn-outline {
-    background: transparent;
-    color: var(--pink);
-    border: 2px solid var(--pink);
-    padding: 0.75rem 1.5rem;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.875rem;
-    transition: background 0.2s;
-    display: block;
-    text-align: center;
-  }
-  .btn-outline:hover { background: var(--pink-light); }
-  .pkg-note {
-    margin-top: 2rem;
-    text-align: center;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-style: italic;
-  }
+  /* Testimonials: single col */
+  .testimonials-grid { grid-template-columns: 1fr; }
 
-  /* TESTIMONIALS */
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-  .testimonial-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.75rem;
-  }
-  .stars { color: var(--pink); font-size: 0.9rem; margin-bottom: 0.9rem; }
-  .testimonial-card p {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin-bottom: 1.25rem;
-  }
-  .reviewer { font-size: 0.85rem; font-weight: 600; color: var(--text); }
-  .reviewer-loc { font-size: 0.75rem; color: var(--text-muted); }
+  /* About */
+  .about-image-wrap { aspect-ratio: 4/3; max-width: 100%; }
+  .about-badge-float { bottom: 0.75rem; right: 0.75rem; }
 
-  /* CONTACT */
-  .contact { background: var(--off-white); }
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
-  }
-  .contact-info h2 { margin-bottom: 0.75rem; }
-  .contact-info p { font-size: 1rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem; }
-  .contact-items { display: flex; flex-direction: column; gap: 1rem; }
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .contact-icon {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    background: var(--teal);
-    display: flex; align-items: center; justify-content: center;
-    color: white;
-    font-size: 1rem;
-    flex-shrink: 0;
-  }
-  .contact-item-text a {
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--text);
-    text-decoration: none;
-  }
-  .contact-item-text a:hover { color: var(--teal); }
-  .contact-item-text span { display: block; font-size: 0.75rem; color: var(--text-muted); }
+  /* Packages */
+  .packages-grid { max-width: 100%; }
+  .pkg-card { padding: 1.6rem 1.4rem; }
 
-  /* CONTACT FORM */
-  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
-  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-  .form-group label { font-size: 0.8rem; font-weight: 600; color: var(--text); letter-spacing: 0.04em; }
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    padding: 0.75rem 1rem;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    color: var(--text);
-    background: white;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus { border-color: var(--teal); }
-  .form-group textarea { resize: vertical; min-height: 110px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .form-submit {
-    background: var(--teal);
-    color: white;
-    padding: 0.85rem 2rem;
-    border-radius: 999px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-    margin-top: 0.5rem;
-  }
-  .form-submit:hover { background: var(--teal-dark); transform: translateY(-1px); }
-  .form-note { font-size: 0.75rem; color: var(--text-muted); }
+  /* Form */
+  .form-row { grid-template-columns: 1fr; }
+  .contact-form-wrap { padding: 1.5rem; border-radius: 16px; }
 
-  /* FOOTER */
-  footer {
-    background: #1a1a1a;
-    color: rgba(255,255,255,0.7);
-    padding: 3rem 2rem 2rem;
-  }
-  .footer-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 2.5rem;
-  }
-  .footer-brand p { font-size: 0.875rem; line-height: 1.7; margin-top: 0.9rem; max-width: 280px; }
-  .footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 0.5rem;
-  }
-  .footer-logo-mark {
-    width: 34px; height: 34px;
-    background: var(--pink);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .footer-logo-mark svg { width: 18px; height: 18px; }
-  .footer-logo span {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.95rem;
-    color: white;
-  }
-  .footer-col h4 { color: white; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: 0.06em; text-transform: uppercase; }
-  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-  .footer-col ul li a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
-  .footer-col ul li a:hover { color: var(--teal); }
-  .footer-bottom {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.4);
-  }
-  .footer-bottom a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  /* Footer */
+  .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-brand { grid-column: auto; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 0.4rem; }
+  footer { padding-left: 1.25rem; padding-right: 1.25rem; }
 
-  /* MOBILE NAV OVERLAY */
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: white;
-    z-index: 200;
-    flex-direction: column;
-    padding: 5rem 2rem 2rem;
-    gap: 0.5rem;
-  }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu a {
-    font-size: 1.3rem;
-    font-family: 'Playfair Display', serif;
-    color: var(--text);
-    text-decoration: none;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .mobile-close {
-    position: absolute;
-    top: 1rem; right: 1.5rem;
-    background: none; border: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-    color: var(--text);
-  }
+  /* Section label: centered on mobile */
+  .section-label { justify-content: flex-start; }
+}
 
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .services-grid, .packages-grid, .testimonials-grid { grid-template-columns: 1fr; }
-    .about-image-wrap { aspect-ratio: 3/2; }
-    .nav-links, .nav-cta { display: none; }
-    .nav-hamburger { display: block; }
-    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
-    .form-row { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 600px) {
-    section { padding: 3.5rem 1.25rem; }
-    nav { padding: 0.8rem 1.25rem; }
-    .trust-strip { gap: 1.5rem; padding: 0.8rem 1.25rem; }
-
-    /* Hero mobile */
-    .hero-image-wrap { width: 100vw; margin-left: 0; }
-    .hero-text { padding: 0 1.5rem 2.5rem; gap: 0.75rem; }
-    .hero h1 { font-size: 1.55rem; line-height: 1.25; }
-    .hero p { font-size: 0.88rem; }
-    .hero-buttons { flex-direction: column; align-items: center; gap: 0.6rem; }
-    .hero-buttons a { width: 100%; max-width: 280px; text-align: center; }
-    .nav-hamburger span { background: white; }
-
-    /* Trust strip wraps nicely on mobile */
-    .trust-strip {
-      flex-direction: column;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .trust-item { font-size: 0.75rem; }
-
-    /* Packages stack cleanly */
-    .pkg-card { padding: 1.5rem; }
-    .pkg-badge { font-size: 0.65rem; }
-
-    /* Contact form full width */
-    .form-group input,
-    .form-group textarea,
-    .form-group select { font-size: 1rem; }
-
-    /* Footer */
-    .footer-bottom { flex-direction: column; text-align: center; gap: 0.5rem; }
-  }
+/* ━━━━━━━━━━━━━━━━━━━ VERY SMALL (≤380px) ━━━ */
+@media (max-width: 380px) {
+  .hero-image-wrap img { height: 64vw; }
+  .trust-strip { grid-template-columns: 1fr; gap: 0.5rem; }
+  .trust-item { justify-content: center; }
+  .nav-logo-text { font-size: 0.88rem; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ─── NAV ─────────────────────────────────── -->
 <nav id="navbar">
-  <div class="nav-logo">
+  <a href="#home" class="nav-logo">
     <div class="nav-logo-mark">
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M20 6 C10 6, 4 14, 6 22 C8 30, 16 36, 24 33 C32 30, 36 22, 33 15 C30 8, 22 6, 20 6Z" fill="none" stroke="white" stroke-width="2.5"/>
-        <path d="M20 6 C28 10, 32 18, 28 26 C24 34, 14 34, 10 28" fill="none" stroke="white" stroke-width="2"/>
+      <svg viewBox="0 0 40 40" fill="none">
+        <path d="M20 6C10 6 4 14 6 22c2 8 10 14 18 11s12-11 9-18C30 8 22 6 20 6z" fill="none" stroke="white" stroke-width="2.5"/>
+        <path d="M20 6c8 4 12 12 8 20S14 34 10 28" fill="none" stroke="white" stroke-width="2"/>
       </svg>
     </div>
-    <span>Pono Home Co.</span>
-  </div>
+    <span class="nav-logo-text">Pono Home Co.</span>
+  </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
@@ -682,38 +1046,39 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="tel:+18087574330" class="nav-cta">📞 Book Now</a>
-  <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu">
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- MOBILE MENU -->
+<!-- ─── MOBILE MENU ──────────────────────────── -->
 <div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</button>
-  <a href="#about" onclick="document.getElementById('mobileMenu').classList.remove('open')">About</a>
-  <a href="#services" onclick="document.getElementById('mobileMenu').classList.remove('open')">Services</a>
-  <a href="#packages" onclick="document.getElementById('mobileMenu').classList.remove('open')">Packages</a>
-  <a href="#testimonials" onclick="document.getElementById('mobileMenu').classList.remove('open')">Reviews</a>
-  <a href="#contact" onclick="document.getElementById('mobileMenu').classList.remove('open')">Contact</a>
-  <a href="tel:+18087574330" style="color: var(--teal); margin-top: 1rem; border-bottom: none;">📞 +1 808-757-4330</a>
+  <button class="mobile-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
+  <a href="#about"         onclick="closeMenu()">About</a>
+  <a href="#services"      onclick="closeMenu()">Services</a>
+  <a href="#packages"      onclick="closeMenu()">Packages</a>
+  <a href="#testimonials"  onclick="closeMenu()">Reviews</a>
+  <a href="#contact"       onclick="closeMenu()">Contact</a>
+  <a href="tel:+18087574330" class="mobile-cta" onclick="closeMenu()">📞 +1 808-757-4330</a>
 </div>
 
-<!-- HERO -->
+<!-- ─── HERO ─────────────────────────────────── -->
 <section class="hero" id="home">
   <div class="hero-image-wrap">
-    <img src="hero.jpg" alt="Pono Home Co. — O'ahu Cleaning & Organizing">
-  </div>
-  <div class="hero-text">
-    <h1>A <em>spotless</em> home,<br>more time with your 'ohana</h1>
-    <p>Professional STR & residential cleaning and organizing across O'ahu. Mandy Kēhau Sinclair and her team treat every home like their own — thorough, trusted, and aloha-spirit guaranteed.</p>
-    <div class="hero-buttons">
-      <a href="#contact" class="btn-primary">Get a Free Quote</a>
-      <a href="#packages" class="btn-secondary">View Packages</a>
+    <img src="hero.jpg" alt="Pono Home Co. — O'ahu Cleaning & Organizing" loading="eager" fetchpriority="high">
+    <!-- Text overlaid at bottom on desktop; drops below on mobile via CSS -->
+    <div class="hero-text">
+      <h1>A <em>spotless</em> home,<br>more time with your &#x02BB;ohana</h1>
+      <p>Professional STR & residential cleaning and organizing across O&#x02BB;ahu. Mandy K&#x0113;hau Sinclair and her team treat every home like their own — thorough, trusted, and aloha-spirit guaranteed.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">Get a Free Quote</a>
+        <a href="#packages" class="btn-secondary">View Packages</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- TRUST STRIP -->
+<!-- ─── TRUST STRIP ──────────────────────────── -->
 <div class="trust-strip">
   <div class="trust-item"><div class="trust-dot"></div>STR Turnover Specialists</div>
   <div class="trust-item"><div class="trust-dot"></div>Residential Deep Cleaning</div>
@@ -721,77 +1086,76 @@
   <div class="trust-item"><div class="trust-dot"></div>Licensed & Insured LLC</div>
 </div>
 
-<!-- ABOUT -->
+<!-- ─── ABOUT ─────────────────────────────────── -->
 <section class="about" id="about">
   <div class="container">
     <div class="about-grid">
-      <div class="about-image-wrap">
+      <div class="about-image-wrap fade-up">
         <div class="about-logo-display">
-          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 80 80" fill="none">
             <circle cx="40" cy="40" r="36" fill="none" stroke="white" stroke-width="3"/>
-            <path d="M40 12 C22 12, 10 26, 13 42 C16 58, 30 68, 46 64 C62 60, 70 46, 66 32 C62 18, 48 12, 40 12Z" fill="none" stroke="white" stroke-width="2.5"/>
-            <path d="M40 12 C54 20, 62 34, 56 50 C50 66, 34 68, 24 60" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+            <path d="M40 12C22 12 10 26 13 42c3 16 17 26 33 22s22-18 18-32C60 18 48 12 40 12z" fill="none" stroke="white" stroke-width="2.5"/>
+            <path d="M40 12c14 8 18 22 12 38S34 68 24 60" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
           </svg>
         </div>
-        <p style="color: rgba(212,83,126,0.8); font-family: 'Playfair Display', serif; font-size: 1rem; text-align: center; padding: 0 2rem;">Pono Home Co.</p>
+        <p class="about-name-tag">Pono Home Co.</p>
         <div class="about-badge-float">
-          Trusted on O'ahu
+          Trusted on O&#x02BB;ahu
           <span>EIN # 85-0787895</span>
         </div>
       </div>
       <div class="about-text">
-        <p class="section-label">Meet Mandy</p>
-        <h2 class="section-title">Mandy Kēhau Sinclair — Owner</h2>
-        <p>
-          Pono Home Co. was founded with a simple mission: give O'ahu families and vacation rental hosts their time back. Mandy Kēhau Sinclair brings the warmth of Hawaiian hospitality to every clean — detail-oriented, reliable, and deeply invested in the wellbeing of every client.
+        <p class="section-label fade-up">Meet Mandy</p>
+        <h2 class="section-title fade-up fade-up-delay-1">Mandy K&#x0113;hau Sinclair<br>— Owner</h2>
+        <p class="fade-up fade-up-delay-2">
+          Pono Home Co. was founded with a simple mission: give O&#x02BB;ahu families and vacation rental hosts their time back. Mandy K&#x0113;hau Sinclair brings the warmth of Hawaiian hospitality to every clean — detail-oriented, reliable, and deeply invested in the wellbeing of every client.
         </p>
-        <p>
+        <p class="fade-up fade-up-delay-3">
           Whether you run a short-term rental and need a flawless guest-ready turnover, or you're a busy family craving a truly spotless home, Mandy's team handles it all — cleaning, organizing, decluttering, and everything in between.
         </p>
-        <p>
-          <strong>Let us give you time back with your family!</strong>
-        </p>
-        <div class="ein-badge">EIN # 85-0787895</div>
-        <br><br>
-        <a href="#contact" class="btn-primary" style="display: inline-block;">Book a Cleaning</a>
+        <p class="fade-up fade-up-delay-4"><strong>Let us give you time back with your family!</strong></p>
+        <div class="fade-up fade-up-delay-5" style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap; margin-top:0.5rem;">
+          <a href="#contact" class="btn-primary">Book a Cleaning</a>
+          <div class="ein-badge">EIN # 85-0787895</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- ─── SERVICES ──────────────────────────────── -->
 <section id="services">
   <div class="container">
-    <p class="section-label">What We Do</p>
-    <h2 class="section-title">Services We Provide</h2>
-    <p class="section-sub">Every service is tailored to your home, your schedule, and your standards — done with aloha.</p>
+    <p class="section-label fade-up">What We Do</p>
+    <h2 class="section-title fade-up fade-up-delay-1">Services We Provide</h2>
+    <p class="section-sub fade-up fade-up-delay-2">Every service is tailored to your home, your schedule, and your standards — done with aloha.</p>
     <div class="services-grid">
-      <div class="service-card">
+      <div class="service-card fade-up fade-up-delay-1">
         <div class="service-icon pink">🏡</div>
         <h3>Residential Cleaning</h3>
         <p>Comprehensive top-to-bottom home cleaning. Kitchens, bathrooms, bedrooms, common areas — every corner done right so you can come home to clean.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card teal-accent fade-up fade-up-delay-2">
         <div class="service-icon teal">🏖️</div>
         <h3>STR & Vacation Rental Turnover</h3>
         <p>Fast, thorough, and guest-ready. We reset your Airbnb, VRBO, or short-term rental between stays — linens, restocking, and a 5-star finish.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card fade-up fade-up-delay-3">
         <div class="service-icon pink">📦</div>
         <h3>Organizing & Decluttering</h3>
         <p>Pantries, closets, garages, and whole homes. We create systems that stick — so your space stays clear long after we leave.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card teal-accent fade-up fade-up-delay-1">
         <div class="service-icon teal">🧼</div>
         <h3>Deep Cleaning</h3>
         <p>Move-ins, move-outs, or a fresh start. We go behind appliances, inside cabinets, and into every corner that regular cleaning doesn't reach.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card fade-up fade-up-delay-2">
         <div class="service-icon pink">🌿</div>
         <h3>Regular Maintenance Cleans</h3>
         <p>Weekly, bi-weekly, or monthly — we keep your home consistently clean on a schedule that works for you, so it never gets overwhelming.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card teal-accent fade-up fade-up-delay-3">
         <div class="service-icon teal">✨</div>
         <h3>Move-In / Move-Out Cleaning</h3>
         <p>Starting fresh or leaving your best impression. We clean top-to-bottom so your deposit is protected and your new home feels brand new.</p>
@@ -800,15 +1164,15 @@
   </div>
 </section>
 
-<!-- PACKAGES -->
+<!-- ─── PACKAGES ──────────────────────────────── -->
 <section class="packages" id="packages">
   <div class="container">
-    <p class="section-label">Packages</p>
-    <h2 class="section-title">Choose Your Clean</h2>
-    <p class="section-sub">Transparent, straightforward packages — no surprises. Contact us for a custom quote based on your home's size and needs.</p>
+    <p class="section-label fade-up">Packages</p>
+    <h2 class="section-title fade-up fade-up-delay-1">Choose Your Clean</h2>
+    <p class="section-sub fade-up fade-up-delay-2">Transparent, straightforward packages — no surprises. Contact us for a custom quote based on your home's size and needs.</p>
     <div class="packages-grid">
 
-      <div class="pkg-card">
+      <div class="pkg-card fade-up fade-up-delay-1">
         <h3>Plumeria Clean</h3>
         <p class="pkg-sub">Studio · 1BR · 2BR homes & STRs</p>
         <ul class="pkg-features">
@@ -823,7 +1187,7 @@
         <a href="#contact" class="btn-outline">Get a Quote</a>
       </div>
 
-      <div class="pkg-card featured">
+      <div class="pkg-card featured fade-up fade-up-delay-2">
         <div class="pkg-badge">Most Popular</div>
         <h3>Hibiscus Clean</h3>
         <p class="pkg-sub">3–4BR homes, STRs & condos</p>
@@ -839,7 +1203,7 @@
         <a href="#contact" class="btn-primary">Get a Quote</a>
       </div>
 
-      <div class="pkg-card">
+      <div class="pkg-card fade-up fade-up-delay-3">
         <h3>Pua Kea Deep Clean</h3>
         <p class="pkg-sub">Any size · Move-in/out · Full resets</p>
         <ul class="pkg-features">
@@ -847,7 +1211,7 @@
           <li>Full cabinet & drawer interiors</li>
           <li>Grout scrubbing</li>
           <li>Deep shampoo of carpets & mats</li>
-          <li>Organzing & decluttering session</li>
+          <li>Organizing & decluttering session</li>
           <li>Full laundry & linen refresh</li>
           <li>Post-construction cleaning available</li>
         </ul>
@@ -855,69 +1219,73 @@
       </div>
 
     </div>
-    <p class="pkg-note">* Prices vary based on home size, condition, and frequency. Contact Mandy for a personalized quote.</p>
+    <p class="pkg-note fade-up">* Prices vary based on home size, condition, and frequency. Contact Mandy for a personalized quote.</p>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section id="testimonials">
+<!-- ─── TESTIMONIALS ─────────────────────────── -->
+<section class="testimonials" id="testimonials">
   <div class="container">
-    <p class="section-label">Happy Clients</p>
-    <h2 class="section-title">What O'ahu is saying</h2>
+    <p class="section-label fade-up">Happy Clients</p>
+    <h2 class="section-title fade-up fade-up-delay-1">What O&#x02BB;ahu is saying</h2>
     <div class="testimonials-grid">
-      <div class="testimonial-card">
+      <div class="testimonial-card fade-up fade-up-delay-1">
         <div class="stars">★★★★★</div>
         <p>"Mandy and her team are absolutely incredible. Our Airbnb has never looked better between guests — fast, thorough, and so easy to work with. Guests keep commenting on how clean the space is!"</p>
         <div class="reviewer">Kalani T.</div>
         <div class="reviewer-loc">STR Host, Kailua</div>
       </div>
-      <div class="testimonial-card">
+      <div class="testimonial-card fade-up fade-up-delay-2">
         <div class="stars">★★★★★</div>
         <p>"I was drowning in clutter after our move. Mandy came in and turned our whole home around in one day. The organizing systems she set up have lasted months. Truly life-changing — worth every penny!"</p>
         <div class="reviewer">Sarah M.</div>
         <div class="reviewer-loc">Homeowner, Honolulu</div>
       </div>
-      <div class="testimonial-card">
+      <div class="testimonial-card fade-up fade-up-delay-3">
         <div class="stars">★★★★★</div>
         <p>"I've tried multiple cleaning services on the island and Pono Home Co. is by far the best. Reliable, detailed, and Mandy genuinely cares about your home. She goes above and beyond every single time."</p>
         <div class="reviewer">Brandon K.</div>
-        <div class="reviewer-loc">Resident, 'Āiea</div>
+        <div class="reviewer-loc">Resident, &#x02BB;&#x0100;iea</div>
       </div>
+    </div>
+    <div class="reviews-badge fade-up">
+      <span class="reviews-badge-stars">★★★★★</span>
+      <p><strong>5-Star Rated</strong> · Trusted by families & STR hosts across O&#x02BB;ahu</p>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- ─── CONTACT ────────────────────────────────── -->
 <section class="contact" id="contact">
   <div class="container">
     <div class="contact-grid">
       <div class="contact-info">
-        <p class="section-label">Get in Touch</p>
-        <h2 class="section-title">Ready for a clean home?</h2>
-        <p>Reach out via phone, email, or fill out the form and Mandy will get back to you quickly with availability and a quote.</p>
+        <p class="section-label fade-up">Get in Touch</p>
+        <h2 class="section-title fade-up fade-up-delay-1">Ready for a<br>clean home?</h2>
+        <p class="fade-up fade-up-delay-2">Reach out via phone, email, or fill out the form — Mandy will get back to you quickly with availability and a quote.</p>
         <div class="contact-items">
-          <div class="contact-item">
+          <div class="contact-item fade-up fade-up-delay-2">
             <div class="contact-icon">📞</div>
             <div class="contact-item-text">
               <a href="tel:+18087574330">+1 808-757-4330</a>
-              <span>Call or text — Mobile</span>
+              <span>Call or text anytime</span>
             </div>
           </div>
-          <div class="contact-item">
+          <div class="contact-item fade-up fade-up-delay-3">
             <div class="contact-icon">✉️</div>
             <div class="contact-item-text">
               <a href="mailto:kapakahi.kleaners@gmail.com">kapakahi.kleaners@gmail.com</a>
-              <span>Work Email</span>
+              <span>Work email</span>
             </div>
           </div>
-          <div class="contact-item">
+          <div class="contact-item fade-up fade-up-delay-4">
             <div class="contact-icon">💳</div>
             <div class="contact-item-text">
               <a href="https://paypal.com" target="_blank" rel="noopener">Pay via PayPal</a>
-              <span>Fast & secure payment</span>
+              <span>Fast & secure</span>
             </div>
           </div>
-          <div class="contact-item">
+          <div class="contact-item fade-up fade-up-delay-5">
             <div class="contact-icon">💵</div>
             <div class="contact-item-text">
               <a href="https://cash.app" target="_blank" rel="noopener">Pay via CashApp</a>
@@ -927,60 +1295,66 @@
         </div>
       </div>
 
-      <form class="contact-form" id="contactForm">
-        <div class="form-row">
-          <div class="form-group">
-            <label>First Name</label>
-            <input type="text" placeholder="Kai" required>
+      <div class="contact-form-wrap fade-up fade-up-delay-2">
+        <p class="form-title">Send a message 🌺</p>
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input id="fname" type="text" placeholder="Kai" autocomplete="given-name" required>
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input id="lname" type="text" placeholder="Aloha" autocomplete="family-name" required>
+            </div>
           </div>
           <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" placeholder="Aloha" required>
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@email.com" autocomplete="email" required>
           </div>
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" placeholder="you@email.com" required>
-        </div>
-        <div class="form-group">
-          <label>Phone</label>
-          <input type="tel" placeholder="+1 (808) 000-0000">
-        </div>
-        <div class="form-group">
-          <label>Service Needed</label>
-          <select>
-            <option value="">Select a service...</option>
-            <option>STR / Vacation Rental Turnover</option>
-            <option>Residential Cleaning</option>
-            <option>Deep Cleaning</option>
-            <option>Organizing & Decluttering</option>
-            <option>Move-In / Move-Out Clean</option>
-            <option>Regular Maintenance (recurring)</option>
-            <option>Not sure — need a quote</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Tell us about your space</label>
-          <textarea placeholder="Approx. home size, number of bedrooms, any special requests or areas of focus..."></textarea>
-        </div>
-        <button type="submit" class="form-submit">Send Message 🌺</button>
-        <p class="form-note">Mandy typically responds within a few hours. Looking forward to hearing from you!</p>
-      </form>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input id="phone" type="tel" placeholder="+1 (808) 000-0000" autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label for="service">Service Needed</label>
+            <select id="service">
+              <option value="">Select a service...</option>
+              <option>STR / Vacation Rental Turnover</option>
+              <option>Residential Cleaning</option>
+              <option>Deep Cleaning</option>
+              <option>Organizing & Decluttering</option>
+              <option>Move-In / Move-Out Clean</option>
+              <option>Regular Maintenance (recurring)</option>
+              <option>Not sure — need a quote</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Tell us about your space</label>
+            <textarea id="message" placeholder="Approx. home size, bedrooms, any special requests..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message →</button>
+          <p class="form-note">Mandy typically responds within a few hours. Looking forward to hearing from you!</p>
+        </form>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ─── FOOTER ────────────────────────────────── -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-logo">
         <div class="footer-logo-mark">
-          <svg viewBox="0 0 40 40" fill="none"><path d="M20 6 C10 6, 4 14, 6 22 C8 30, 16 36, 24 33 C32 30, 36 22, 33 15 C30 8, 22 6, 20 6Z" fill="none" stroke="white" stroke-width="2.5"/><path d="M20 6 C28 10, 32 18, 28 26 C24 34, 14 34, 10 28" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"/></svg>
+          <svg viewBox="0 0 40 40" fill="none">
+            <path d="M20 6C10 6 4 14 6 22c2 8 10 14 18 11s12-11 9-18C30 8 22 6 20 6z" fill="none" stroke="white" stroke-width="2.5"/>
+            <path d="M20 6c8 4 12 12 8 20S14 34 10 28" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+          </svg>
         </div>
         <span>Pono Home Co.</span>
       </div>
-      <p>STR & Residential Cleaning & Organizing on O'ahu, Hawai'i. Let us give you time back with your family.</p>
+      <p>STR & Residential Cleaning & Organizing on O&#x02BB;ahu, Hawai&#x02BB;i.<br>Let us give you time back with your family.</p>
     </div>
     <div class="footer-col">
       <h4>Quick Links</h4>
@@ -997,38 +1371,57 @@
       <ul>
         <li><a href="tel:+18087574330">+1 808-757-4330</a></li>
         <li><a href="mailto:kapakahi.kleaners@gmail.com">kapakahi.kleaners@gmail.com</a></li>
-        <li><a href="#">Pay via PayPal</a></li>
-        <li><a href="#">Pay via CashApp</a></li>
+        <li><a href="https://paypal.com" target="_blank" rel="noopener">Pay via PayPal</a></li>
+        <li><a href="https://cash.app" target="_blank" rel="noopener">Pay via CashApp</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 Pono Home Co. · O'ahu, Hawai'i · EIN # 85-0787895</span>
-    <span>Built with <span style="color: var(--pink);">♥</span> for Mandy Kēhau Sinclair</span>
+    <span>© 2026 Pono Home Co. · O&#x02BB;ahu, Hawai&#x02BB;i · EIN # 85-0787895</span>
+    <span>Built with <span style="color:var(--pink);">♥</span> for Mandy K&#x0113;hau Sinclair</span>
   </div>
 </footer>
 
 <script>
-  // Nav becomes solid white after scrolling past hero image
-  window.addEventListener('scroll', () => {
-    const nav = document.getElementById('navbar');
-    const heroImg = document.querySelector('.hero-image-wrap');
-    const threshold = heroImg ? heroImg.offsetHeight - 10 : 400;
-    if (window.scrollY > threshold) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
+/* ── Nav ── */
+const navbar = document.getElementById('navbar');
+const heroWrap = document.querySelector('.hero-image-wrap');
+function updateNav() {
+  const threshold = heroWrap ? heroWrap.offsetHeight - 10 : 300;
+  navbar.classList.toggle('scrolled', window.scrollY > threshold);
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+
+/* ── Mobile menu ── */
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ── Scroll reveal ── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
     }
   });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // Contact form — show a nice confirmation
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = this.querySelector('.form-submit');
-    btn.textContent = '✓ Message Sent! Mandy will be in touch soon 🌺';
-    btn.style.background = '#1D9E75';
-    btn.disabled = true;
-  });
+/* ── Contact form ── */
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('.form-submit');
+  btn.textContent = '✓ Sent! Mandy will be in touch soon 🌺';
+  btn.style.background = 'linear-gradient(135deg, #0F6E56, #0a4d3c)';
+  btn.disabled = true;
+});
 </script>
 
 </body>
