@@ -95,63 +95,38 @@
 
   /* HERO */
   .hero {
-    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 62px; /* offset for fixed nav */
+  }
+  .hero-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-image: url('hero.png');
+    background-size: cover;
+    background-position: center;
+    display: block;
+  }
+  .hero-text {
+    background: #1a1a1a;
+    text-align: center;
+    padding: 3rem 2rem 3.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
-    text-align: center;
-    padding: 0 2rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background-image: url('hero.png');
-    background-size: cover;
-    background-position: center top;
-    z-index: 0;
-  }
-  .hero-bg::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(to bottom,
-      rgba(0,0,0,0) 0%,
-      rgba(0,0,0,0) 45%,
-      rgba(0,0,0,0.65) 68%,
-      rgba(0,0,0,0.82) 100%);
+    gap: 1rem;
   }
   .hero-leaf { display: none; }
-  .hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 680px;
-    width: 100%;
-  }
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(8px);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.4rem 1rem;
-    border-radius: 999px;
-    margin-bottom: 1rem;
-    border: 1px solid rgba(255,255,255,0.3);
-  }
+  .hero-bg { display: none; }
+  .hero-content { display: contents; }
   .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(1.9rem, 5vw, 3.2rem);
+    font-size: clamp(1.8rem, 4vw, 3rem);
     font-weight: 700;
-    line-height: 1.15;
-    margin-bottom: 0.75rem;
+    line-height: 1.2;
     color: white;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    margin: 0;
   }
   .hero h1 em {
     font-style: italic;
@@ -159,33 +134,25 @@
   }
   .hero p {
     font-size: 1rem;
-    color: rgba(255,255,255,0.88);
-    line-height: 1.65;
-    margin-bottom: 1.5rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
     max-width: 520px;
-    margin-left: auto;
-    margin-right: auto;
-    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+    margin: 0;
   }
   .hero-buttons {
     display: flex;
-    gap: 0.75rem;
+    gap: 1rem;
     justify-content: center;
-    flex-wrap: nowrap;
-  }
-  .hero-buttons a {
-    flex: 1;
-    max-width: 200px;
-    text-align: center;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
   }
   .hero .btn-secondary {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(8px);
-    border-color: rgba(255,255,255,0.7);
+    background: transparent;
+    border-color: rgba(255,255,255,0.6);
     color: white;
   }
   .hero .btn-secondary:hover {
-    background: rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.1);
   }
   .btn-primary {
     background: var(--pink);
@@ -639,39 +606,14 @@
     nav { padding: 0.8rem 1.25rem; }
     .trust-strip { gap: 1.5rem; padding: 0.8rem 1.25rem; }
 
-    /* Hero mobile — logo fills top, text at bottom */
-    .hero {
-      padding: 0 1.25rem 3rem;
-      min-height: 100svh;
-    }
-    .hero-bg {
-      background-position: center center;
-    }
-    .hero-bg::after {
-      background: linear-gradient(to bottom,
-        rgba(0,0,0,0) 0%,
-        rgba(0,0,0,0) 40%,
-        rgba(0,0,0,0.65) 65%,
-        rgba(0,0,0,0.82) 100%);
-    }
-    .hero h1 {
-      font-size: 1.75rem;
-      line-height: 1.2;
-      margin-bottom: 0.75rem;
-    }
-    .hero p {
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-    }
-    .hero-buttons {
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .hero-buttons a {
-      width: 100%;
-      max-width: 280px;
-    }
+    /* Hero mobile */
+    .hero { margin-top: 56px; }
+    .hero-image { aspect-ratio: 4/5; background-position: center; }
+    .hero-text { padding: 2rem 1.25rem 2.5rem; gap: 0.85rem; }
+    .hero h1 { font-size: 1.6rem; }
+    .hero p { font-size: 0.9rem; }
+    .hero-buttons { flex-direction: column; align-items: center; }
+    .hero-buttons a { width: 100%; max-width: 260px; text-align: center; }
 
     /* Trust strip wraps nicely on mobile */
     .trust-strip {
@@ -734,8 +676,8 @@
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
+  <div class="hero-image"></div>
+  <div class="hero-text">
     <h1>A <em>spotless</em> home,<br>more time with your 'ohana</h1>
     <p>Professional STR & residential cleaning and organizing across O'ahu. Mandy Kēhau Sinclair and her team treat every home like their own — thorough, trusted, and aloha-spirit guaranteed.</p>
     <div class="hero-buttons">
