@@ -28,7 +28,7 @@
   body {
     font-family: 'DM Sans', sans-serif;
     color: var(--text);
-    background: var(--white);
+    background: #1a1a1a;
     overflow-x: hidden;
   }
 
@@ -37,7 +37,7 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 100%);
+    background: transparent;
     backdrop-filter: none;
     border-bottom: none;
     display: flex;
@@ -53,7 +53,7 @@
   }
   nav.scrolled .nav-links a { color: var(--text-muted); }
   nav.scrolled .nav-links a:hover { color: var(--pink); }
-  nav.scrolled .nav-logo span { color: var(--text); }
+  nav.scrolled .nav-logo span { color: var(--text); text-shadow: none; }
   nav.scrolled .nav-hamburger span { background: var(--text); }
   .nav-logo {
     display: flex;
@@ -105,31 +105,34 @@
     transition: all 0.3s;
   }
 
-  /* HERO — image tag approach, no stretching or overlap possible */
+  /* HERO — img tag, no overlap ever */
   .hero {
     display: block;
     background: #1a1a1a;
     margin-top: 0;
+    padding: 0;
   }
   .hero-image-wrap {
     position: relative;
-    width: 100%;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
     line-height: 0;
+    overflow: hidden;
   }
   .hero-image-wrap img {
     width: 100%;
     height: auto;
     display: block;
   }
-  /* Fade bottom of image into dark */
+  /* Fade bottom edge seamlessly into dark */
   .hero-image-wrap::after {
     content: '';
     position: absolute;
-    left: 0; right: 0; bottom: -1px;
-    height: 30%;
+    left: 0; right: 0; bottom: -2px;
+    height: 35%;
     background: linear-gradient(to bottom,
       transparent 0%,
-      rgba(26,26,26,0.95) 75%,
+      rgba(26,26,26,0.92) 70%,
       rgb(26,26,26) 100%);
     pointer-events: none;
   }
@@ -137,7 +140,7 @@
   .hero-text {
     background: #1a1a1a;
     text-align: center;
-    padding: 1.5rem 2rem 4rem;
+    padding: 0.5rem 2rem 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -628,7 +631,8 @@
     .trust-strip { gap: 1.5rem; padding: 0.8rem 1.25rem; }
 
     /* Hero mobile */
-    .hero-text { padding: 1rem 1.5rem 3rem; gap: 0.75rem; }
+    .hero-image-wrap { width: 100vw; margin-left: 0; }
+    .hero-text { padding: 0 1.5rem 2.5rem; gap: 0.75rem; }
     .hero h1 { font-size: 1.55rem; line-height: 1.25; }
     .hero p { font-size: 0.88rem; }
     .hero-buttons { flex-direction: column; align-items: center; gap: 0.6rem; }
@@ -1005,10 +1009,12 @@
 </footer>
 
 <script>
-  // Nav becomes solid white after scrolling past hero
+  // Nav becomes solid white after scrolling past hero image
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
-    if (window.scrollY > 60) {
+    const heroImg = document.querySelector('.hero-image-wrap');
+    const threshold = heroImg ? heroImg.offsetHeight - 10 : 400;
+    if (window.scrollY > threshold) {
       nav.classList.add('scrolled');
     } else {
       nav.classList.remove('scrolled');
